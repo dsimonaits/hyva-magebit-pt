@@ -1,0 +1,62 @@
+.tb-text-secondary {
+    color: #E53647
+}
+
+th {
+    height: 60px;
+    text-transform: uppercase;
+    padding: 20px;
+}
+
+td {
+    padding: 5px 10px 5px 10px;
+}
+
+
+.table-bt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    vertical-align: middle;
+    width: 167px;
+    height: 48px;
+    color: white;
+    background: #E53848;
+
+}
+
+.status-cell {
+    position: relative;
+}
+.status-cell::before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: gray;
+    margin-right: 5px; /* Adjust spacing between circle and text */
+    position: absolute;
+    left: -5px; /* Adjust the positioning of the circle */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.pending.status-cell::before {
+    background-color: orange;
+}
+
+.complete.status-cell::before {
+    background-color: green;
+}
+
+.closed.status-cell::before {
+    background-color: red;
+}
+
+.canceled.status-cell::before {
+    background-color: red;
+}

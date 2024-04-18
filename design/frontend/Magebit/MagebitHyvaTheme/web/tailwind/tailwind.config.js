@@ -74,11 +74,11 @@ module.exports = hyvaModules.mergeTailwindConfig({
                 },
                 secondary: {
                     lighter: colors.blue['100'],
-                    "DEFAULT": colors.blue['200'],
+                    "DEFAULT": '#160F3E',
                     darker: colors.blue['300']
                 },
                 container: {
-                    lighter: '#ffffff',
+                    lighter: '#F2F2F2',
                     "DEFAULT": '#fafafa',
                     darker: '#f5f5f5'
                 }
@@ -125,6 +125,14 @@ module.exports = hyvaModules.mergeTailwindConfig({
             },
             height: {
                 '42': '10.5rem'
+            },
+            spacing: {
+                '1': '10px',
+                '2': '12px',
+                '3': '16px',
+                '4': '24px',
+                '5': '32px',
+                '6': '48px',
             }
         }
     },
@@ -142,17 +150,5 @@ module.exports = hyvaModules.mergeTailwindConfig({
         root + 'app/code/**/Block/Widget/**/*.php',
         // root + 'var/custom_html/**/*'
 
-
-        // this theme's phtml and layout XML files
-        // '../../**/*.phtml',
-        // '../../*/layout/*.xml',
-        // '../../*/page_layout/override/base/*.xml',
-        // '../../../../../../../vendor/hyva-themes/magento2-default-theme/**/*.phtml',
-        // parent theme in Vendor (if this is a child-theme)
-        //'../../../../../../../vendor/hyva-themes/magento2-default-theme/**/*.phtml',
-        //'../../../../../../../vendor/hyva-themes/magento2-default-theme/*/layout/*.xml',
-        //'../../../../../../../vendor/hyva-themes/magento2-default-theme/*/page_layout/override/base/*.xml',
-        // app/code phtml files (if need tailwind classes from app/code modules)
-        //'../../../../../../../app/code/**/*.phtml',
     ]
 });
