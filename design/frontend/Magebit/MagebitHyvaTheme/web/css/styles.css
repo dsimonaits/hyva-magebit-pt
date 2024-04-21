@@ -4104,6 +4104,11 @@ td {
   display: none;
 }
 
+.size-1 {
+  width: 10px;
+  height: 10px;
+}
+
 .h-10 {
   height: 2.5rem;
 }

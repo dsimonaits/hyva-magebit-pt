@@ -1,0 +1,669 @@
+<div x-data="data()" class="p-4">
+    <table>
+        <thead>
+        <tr>
+            <th @click="sortByColumn" class="cursor-pointer select-none">First Name</th>
+            <th @click="sortByColumn" class="cursor-pointer select-none">Date</th>
+            <th @click="sortByColumn" class="cursor-pointer select-none">Company</th>
+            <th @click="sortByColumn" class="cursor-pointer select-none">Country</th>
+        </tr>
+        </thead>
+        <tbody x-ref="tbody">
+        <tr>
+            <td>Wyatt</td>
+            <td>1618087669</td>
+            <td>Eget Company</td>
+            <td>Haiti</td>
+        </tr>
+        <tr>
+            <td>Fatima</td>
+            <td>1606571508</td>
+            <td>Donec Sollicitudin Consulting</td>
+            <td>Indonesia</td>
+        </tr>
+        <tr>
+            <td>Shea</td>
+            <td>1567905530</td>
+            <td>Sed Hendrerit A Foundation</td>
+            <td>Hong Kong</td>
+        </tr>
+        <tr>
+            <td>Blaine</td>
+            <td>1587774135</td>
+            <td>Elit Pretium Et Inc.</td>
+            <td>India</td>
+        </tr>
+        <tr>
+            <td>Unity</td>
+            <td>1557103079</td>
+            <td>Erat Vitae Risus Foundation</td>
+            <td>Libya</td>
+        </tr>
+        <tr>
+            <td>Rafael</td>
+            <td>1612582316</td>
+            <td>Class Aptent PC</td>
+            <td>Bahrain</td>
+        </tr>
+        <tr>
+            <td>John</td>
+            <td>1574263042</td>
+            <td>Vitae Erat Vivamus Corp.</td>
+            <td>Senegal</td>
+        </tr>
+        <tr>
+            <td>Elton</td>
+            <td>1556240680</td>
+            <td>Risus Nulla Eget LLP</td>
+            <td>Eritrea</td>
+        </tr>
+        <tr>
+            <td>Regan</td>
+            <td>1583656732</td>
+            <td>Etiam Vestibulum Corporation</td>
+            <td>Armenia</td>
+        </tr>
+        <tr>
+            <td>Abel</td>
+            <td>1595138641</td>
+            <td>Est Ac Associates</td>
+            <td>Mauritius</td>
+        </tr>
+        <tr>
+            <td>Madeson</td>
+            <td>1604142991</td>
+            <td>Est Mauris Industries</td>
+            <td>Eritrea</td>
+        </tr>
+        <tr>
+            <td>Cairo</td>
+            <td>1599294937</td>
+            <td>Sodales Mauris Blandit Foundation</td>
+            <td>Trinidad and Tobago</td>
+        </tr>
+        <tr>
+            <td>Ulysses</td>
+            <td>1568375940</td>
+            <td>Turpis LLP</td>
+            <td>United Kingdom (Great Britain)</td>
+        </tr>
+        <tr>
+            <td>Patricia</td>
+            <td>1564731816</td>
+            <td>Sed Industries</td>
+            <td>Mozambique</td>
+        </tr>
+        <tr>
+            <td>Ryan</td>
+            <td>1570421675</td>
+            <td>Nunc Incorporated</td>
+            <td>Slovenia</td>
+        </tr>
+        <tr>
+            <td>Myles</td>
+            <td>1600590716</td>
+            <td>Nunc Nulla Vulputate LLC</td>
+            <td>Kenya</td>
+        </tr>
+        <tr>
+            <td>Luke</td>
+            <td>1582509453</td>
+            <td>Cursus Ltd</td>
+            <td>Bonaire, Sint Eustatius and Saba</td>
+        </tr>
+        <tr>
+            <td>Edward</td>
+            <td>1566694265</td>
+            <td>Neque Tellus Imperdiet Incorporated</td>
+            <td>Saint Pierre and Miquelon</td>
+        </tr>
+        <tr>
+            <td>Tana</td>
+            <td>1609999107</td>
+            <td>Nulla Magna Malesuada Corp.</td>
+            <td>Turkey</td>
+        </tr>
+        <tr>
+            <td>Vernon</td>
+            <td>1612081524</td>
+            <td>Arcu Vivamus LLP</td>
+            <td>Jordan</td>
+        </tr>
+        <tr>
+            <td>Kasimir</td>
+            <td>1616174768</td>
+            <td>Pede Inc.</td>
+            <td>Albania</td>
+        </tr>
+        <tr>
+            <td>Sebastian</td>
+            <td>1597222895</td>
+            <td>Lorem Donec Consulting</td>
+            <td>Ghana</td>
+        </tr>
+        <tr>
+            <td>Deanna</td>
+            <td>1602059745</td>
+            <td>Imperdiet Erat Industries</td>
+            <td>Dominica</td>
+        </tr>
+        <tr>
+            <td>Martena</td>
+            <td>1565582477</td>
+            <td>Non Vestibulum Institute</td>
+            <td>Afghanistan</td>
+        </tr>
+        <tr>
+            <td>Kaden</td>
+            <td>1555268586</td>
+            <td>Luctus Foundation</td>
+            <td>Honduras</td>
+        </tr>
+        <tr>
+            <td>Ashton</td>
+            <td>1564718448</td>
+            <td>Vel Faucibus Id PC</td>
+            <td>Maldives</td>
+        </tr>
+        <tr>
+            <td>Hedley</td>
+            <td>1607078196</td>
+            <td>In Faucibus Foundation</td>
+            <td>Togo</td>
+        </tr>
+        <tr>
+            <td>Ginger</td>
+            <td>1608641906</td>
+            <td>Convallis Ante Company</td>
+            <td>Monaco</td>
+        </tr>
+        <tr>
+            <td>Kevin</td>
+            <td>1573980391</td>
+            <td>Arcu Et Pede Corp.</td>
+            <td>Nepal</td>
+        </tr>
+        <tr>
+            <td>Brady</td>
+            <td>1583214234</td>
+            <td>Interdum Associates</td>
+            <td>Switzerland</td>
+        </tr>
+        <tr>
+            <td>David</td>
+            <td>1576395058</td>
+            <td>Dolor Nulla Semper LLP</td>
+            <td>Estonia</td>
+        </tr>
+        <tr>
+            <td>Xerxes</td>
+            <td>1602630107</td>
+            <td>Vitae Corp.</td>
+            <td>Virgin Islands, British</td>
+        </tr>
+        <tr>
+            <td>Zenaida</td>
+            <td>1574386211</td>
+            <td>Non Institute</td>
+            <td>Togo</td>
+        </tr>
+        <tr>
+            <td>Salvador</td>
+            <td>1600541395</td>
+            <td>Metus Consulting</td>
+            <td>Belgium</td>
+        </tr>
+        <tr>
+            <td>Erica</td>
+            <td>1579208898</td>
+            <td>At Augue Industries</td>
+            <td>Qatar</td>
+        </tr>
+        <tr>
+            <td>Libby</td>
+            <td>1556385821</td>
+            <td>Sem Mollis LLP</td>
+            <td>Kiribati</td>
+        </tr>
+        <tr>
+            <td>Hilary</td>
+            <td>1591110989</td>
+            <td>Ultrices Iaculis Corporation</td>
+            <td>Slovakia</td>
+        </tr>
+        <tr>
+            <td>Kylynn</td>
+            <td>1598513684</td>
+            <td>Vulputate Mauris Sagittis Ltd</td>
+            <td>Mozambique</td>
+        </tr>
+        <tr>
+            <td>Cameron</td>
+            <td>1560140426</td>
+            <td>Cursus In Hendrerit Company</td>
+            <td>Jordan</td>
+        </tr>
+        <tr>
+            <td>Haley</td>
+            <td>1568345180</td>
+            <td>Neque Nullam Company</td>
+            <td>Guatemala</td>
+        </tr>
+        <tr>
+            <td>Cain</td>
+            <td>1596397149</td>
+            <td>Enim Condimentum Consulting</td>
+            <td>Isle of Man</td>
+        </tr>
+        <tr>
+            <td>Gary</td>
+            <td>1563980939</td>
+            <td>Dolor LLP</td>
+            <td>Saint Lucia</td>
+        </tr>
+        <tr>
+            <td>Jordan</td>
+            <td>1600880622</td>
+            <td>Risus Donec Nibh Consulting</td>
+            <td>Morocco</td>
+        </tr>
+        <tr>
+            <td>Ahmed</td>
+            <td>1572492139</td>
+            <td>Egestas Limited</td>
+            <td>Guadeloupe</td>
+        </tr>
+        <tr>
+            <td>Urielle</td>
+            <td>1567502736</td>
+            <td>Cursus LLP</td>
+            <td>Lebanon</td>
+        </tr>
+        <tr>
+            <td>Paula</td>
+            <td>1570507939</td>
+            <td>Dui Fusce Company</td>
+            <td>India</td>
+        </tr>
+        <tr>
+            <td>Maxine</td>
+            <td>1610373490</td>
+            <td>Magna Corp.</td>
+            <td>Pakistan</td>
+        </tr>
+        <tr>
+            <td>Kendall</td>
+            <td>1567269483</td>
+            <td>Sed Associates</td>
+            <td>Kyrgyzstan</td>
+        </tr>
+        <tr>
+            <td>Sybil</td>
+            <td>1555532175</td>
+            <td>Adipiscing LLC</td>
+            <td>Bangladesh</td>
+        </tr>
+        <tr>
+            <td>Kimberley</td>
+            <td>1557932912</td>
+            <td>Curabitur LLC</td>
+            <td>Mongolia</td>
+        </tr>
+        <tr>
+            <td>Nicole</td>
+            <td>1556119477</td>
+            <td>Ante Institute</td>
+            <td>Netherlands</td>
+        </tr>
+        <tr>
+            <td>Alma</td>
+            <td>1597145684</td>
+            <td>Eget Ipsum Incorporated</td>
+            <td>Bermuda</td>
+        </tr>
+        <tr>
+            <td>Suki</td>
+            <td>1611586717</td>
+            <td>Auctor Mauris Foundation</td>
+            <td>Virgin Islands, United States</td>
+        </tr>
+        <tr>
+            <td>Francis</td>
+            <td>1612618718</td>
+            <td>Litora Foundation</td>
+            <td>Albania</td>
+        </tr>
+        <tr>
+            <td>Jin</td>
+            <td>1570618983</td>
+            <td>Neque Sed Institute</td>
+            <td>Saint Martin</td>
+        </tr>
+        <tr>
+            <td>Ann</td>
+            <td>1558982305</td>
+            <td>Torquent Company</td>
+            <td>Northern Mariana Islands</td>
+        </tr>
+        <tr>
+            <td>Cameron</td>
+            <td>1616812651</td>
+            <td>Dui Augue PC</td>
+            <td>Guinea-Bissau</td>
+        </tr>
+        <tr>
+            <td>Lois</td>
+            <td>1617037164</td>
+            <td>Turpis Egestas Aliquam LLC</td>
+            <td>Serbia</td>
+        </tr>
+        <tr>
+            <td>Lucas</td>
+            <td>1613891103</td>
+            <td>Cras Convallis Convallis Incorporated</td>
+            <td>Tuvalu</td>
+        </tr>
+        <tr>
+            <td>Robert</td>
+            <td>1616831827</td>
+            <td>Eget Lacus Limited</td>
+            <td>Heard Island and Mcdonald Islands</td>
+        </tr>
+        <tr>
+            <td>Addison</td>
+            <td>1566719021</td>
+            <td>Nulla Ante Iaculis LLC</td>
+            <td>Tuvalu</td>
+        </tr>
+        <tr>
+            <td>Rebekah</td>
+            <td>1609170686</td>
+            <td>Neque In Ornare Inc.</td>
+            <td>Vanuatu</td>
+        </tr>
+        <tr>
+            <td>Cain</td>
+            <td>1594612512</td>
+            <td>Dolor Nulla Semper LLP</td>
+            <td>Niger</td>
+        </tr>
+        <tr>
+            <td>Xantha</td>
+            <td>1593523990</td>
+            <td>A Company</td>
+            <td>Belarus</td>
+        </tr>
+        <tr>
+            <td>Giselle</td>
+            <td>1572252776</td>
+            <td>Congue Corporation</td>
+            <td>Liberia</td>
+        </tr>
+        <tr>
+            <td>Ishmael</td>
+            <td>1614174417</td>
+            <td>Massa Quisque Company</td>
+            <td>Algeria</td>
+        </tr>
+        <tr>
+            <td>Dean</td>
+            <td>1608111952</td>
+            <td>Porttitor Tellus Non Ltd</td>
+            <td>Egypt</td>
+        </tr>
+        <tr>
+            <td>Melissa</td>
+            <td>1590715580</td>
+            <td>Elit LLP</td>
+            <td>Botswana</td>
+        </tr>
+        <tr>
+            <td>Ryder</td>
+            <td>1617533001</td>
+            <td>Dignissim Industries</td>
+            <td>Saint Barthélemy</td>
+        </tr>
+        <tr>
+            <td>Justine</td>
+            <td>1569962084</td>
+            <td>Aliquet Limited</td>
+            <td>Solomon Islands</td>
+        </tr>
+        <tr>
+            <td>Reuben</td>
+            <td>1563874828</td>
+            <td>Elit Curabitur Sed PC</td>
+            <td>Gambia</td>
+        </tr>
+        <tr>
+            <td>Holmes</td>
+            <td>1600068909</td>
+            <td>Urna Nec Associates</td>
+            <td>Ireland</td>
+        </tr>
+        <tr>
+            <td>Joseph</td>
+            <td>1587794849</td>
+            <td>Consectetuer Cursus Limited</td>
+            <td>Aruba</td>
+        </tr>
+        <tr>
+            <td>Macon</td>
+            <td>1614456440</td>
+            <td>Vehicula Industries</td>
+            <td>Cameroon</td>
+        </tr>
+        <tr>
+            <td>Sacha</td>
+            <td>1602097774</td>
+            <td>Dictum Augue Inc.</td>
+            <td>Timor-Leste</td>
+        </tr>
+        <tr>
+            <td>Norman</td>
+            <td>1611890155</td>
+            <td>Integer Urna Incorporated</td>
+            <td>Argentina</td>
+        </tr>
+        <tr>
+            <td>Lionel</td>
+            <td>1591805012</td>
+            <td>Non Limited</td>
+            <td>Sri Lanka</td>
+        </tr>
+        <tr>
+            <td>Genevieve</td>
+            <td>1565842755</td>
+            <td>Arcu Vestibulum Limited</td>
+            <td>Morocco</td>
+        </tr>
+        <tr>
+            <td>Myles</td>
+            <td>1603850062</td>
+            <td>Proin Sed Turpis Ltd</td>
+            <td>Christmas Island</td>
+        </tr>
+        <tr>
+            <td>Cadman</td>
+            <td>1599637647</td>
+            <td>Elementum At Egestas Company</td>
+            <td>Micronesia</td>
+        </tr>
+        <tr>
+            <td>Jordan</td>
+            <td>1568449130</td>
+            <td>Mauris Ltd</td>
+            <td>United Arab Emirates</td>
+        </tr>
+        <tr>
+            <td>Marsden</td>
+            <td>1572625904</td>
+            <td>Eu Corporation</td>
+            <td>Mauritania</td>
+        </tr>
+        <tr>
+            <td>Naida</td>
+            <td>1561347314</td>
+            <td>Ligula Eu Enim Ltd</td>
+            <td>Slovenia</td>
+        </tr>
+        <tr>
+            <td>Tashya</td>
+            <td>1606447694</td>
+            <td>Ac Fermentum Vel Corporation</td>
+            <td>Ireland</td>
+        </tr>
+        <tr>
+            <td>Rhea</td>
+            <td>1593772801</td>
+            <td>Vulputate Foundation</td>
+            <td>Sao Tome and Principe</td>
+        </tr>
+        <tr>
+            <td>Maile</td>
+            <td>1599035904</td>
+            <td>Dignissim Inc.</td>
+            <td>Antigua and Barbuda</td>
+        </tr>
+        <tr>
+            <td>Adena</td>
+            <td>1580106678</td>
+            <td>Augue Scelerisque Associates</td>
+            <td>Venezuela</td>
+        </tr>
+        <tr>
+            <td>Amy</td>
+            <td>1615571340</td>
+            <td>Cubilia Curae; Phasellus Company</td>
+            <td>Iran</td>
+        </tr>
+        <tr>
+            <td>Desiree</td>
+            <td>1610890757</td>
+            <td>Eu Enim Etiam LLP</td>
+            <td>Guinea-Bissau</td>
+        </tr>
+        <tr>
+            <td>Brent</td>
+            <td>1584743767</td>
+            <td>Maecenas Corporation</td>
+            <td>Guyana</td>
+        </tr>
+        <tr>
+            <td>Devin</td>
+            <td>1589074663</td>
+            <td>Feugiat Nec Associates</td>
+            <td>Guyana</td>
+        </tr>
+        <tr>
+            <td>Irene</td>
+            <td>1582124201</td>
+            <td>Nunc Quisque Ornare Corporation</td>
+            <td>Belize</td>
+        </tr>
+        <tr>
+            <td>Francis</td>
+            <td>1563454426</td>
+            <td>Nullam Feugiat Placerat PC</td>
+            <td>Mali</td>
+        </tr>
+        <tr>
+            <td>Dahlia</td>
+            <td>1598099669</td>
+            <td>Suspendisse Foundation</td>
+            <td>Ghana</td>
+        </tr>
+        <tr>
+            <td>Avye</td>
+            <td>1579105180</td>
+            <td>Ridiculus Mus Proin LLP</td>
+            <td>Tonga</td>
+        </tr>
+        <tr>
+            <td>Tatyana</td>
+            <td>1558687607</td>
+            <td>Amet Consectetuer Incorporated</td>
+            <td>Holy See (Vatican City State)</td>
+        </tr>
+        <tr>
+            <td>Cade</td>
+            <td>1601994001</td>
+            <td>A Company</td>
+            <td>Cyprus</td>
+        </tr>
+        <tr>
+            <td>Quinlan</td>
+            <td>1587045467</td>
+            <td>Nam Ligula Institute</td>
+            <td>Guyana</td>
+        </tr>
+        <tr>
+            <td>Sara</td>
+            <td>1599073712</td>
+            <td>Ullamcorper Consulting</td>
+            <td>Lesotho</td>
+        </tr>
+        <tr>
+            <td>Kylynn</td>
+            <td>1587587384</td>
+            <td>Ut Erat Sed Industries</td>
+            <td>Azerbaijan</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function data() {
+        return {
+            sortBy: "",
+            sortAsc: false,
+            sortByColumn($event) {
+                if (this.sortBy === $event.target.innerText) {
+                    if (this.sortAsc) {
+                        this.sortBy = "";
+                        this.sortAsc = false;
+                    } else {
+                        this.sortAsc = !this.sortAsc;
+                    }
+                } else {
+                    this.sortBy = $event.target.innerText;
+                }
+
+                let rows = this.getTableRows()
+                    .sort(
+                        this.sortCallback(
+                            Array.from($event.target.parentNode.children).indexOf(
+                                $event.target
+                            )
+                        )
+                    )
+                    .forEach((tr) => {
+                        this.$refs.tbody.appendChild(tr);
+                    });
+            },
+            getTableRows() {
+                return Array.from(this.$refs.tbody.querySelectorAll("tr"));
+            },
+            getCellValue(row, index) {
+                return row.children[index].innerText;
+            },
+            sortCallback(index) {
+                return (a, b) =>
+                    ((row1, row2) => {
+                        return row1 !== "" &&
+                        row2 !== "" &&
+                        !isNaN(row1) &&
+                        !isNaN(row2)
+                            ? row1 - row2
+                            : row1.toString().localeCompare(row2);
+                    })(
+                        this.getCellValue(this.sortAsc ? a : b, index),
+                        this.getCellValue(this.sortAsc ? b : a, index)
+                    );
+            }
+        };
+    }
+
+
+</script>
