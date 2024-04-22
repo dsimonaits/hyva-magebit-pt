@@ -49,12 +49,15 @@ foreach ($orders as $order) {
         $reorderData = $formData['data'];
     }
 
+    $minimumDigits = 5;
+
     $ordersData[] = [
-        'order_id' => $order->getRealOrderId(),
+        'order_id' => sprintf('%0' . $minimumDigits . 'd', ltrim($order->getRealOrderId(), '0')),
         'date' => $order->getCreatedAt(),
         'quote_id' => $order->getQuoteId(),
         'ship_to' => $order->getShippingAddress() ? $order->getShippingAddress()->getName() : 'N/A',
-        'total' => $order->getGrandTotal(),
+        'total' =>  $order->getGrandTotal(),
+        'currency_code' => $order->getOrderCurrencyCode(),
         'status' => $order->getStatusLabel(),
         'view_url' => $viewUrl,
         'can_reorder' => $canReorder,
@@ -63,8 +66,7 @@ foreach ($orders as $order) {
         'status_not_received' => $order->getStatus() !== 'received',
     ];
 }
-$jsonOrders = json_encode($ordersData);
-
+$jsonOrders = json_encode($ordersData, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
 
 ?>
 <div
@@ -163,7 +165,7 @@ $jsonOrders = json_encode($ordersData);
                         <td class="hidden lg:table-cell" x-text="order.date" @click="sortOrders('date')"></td>
                         <td class="tb-text-secondary" x-text="order.quote_id"></td>
                         <td x-text="order.ship_to"></td>
-                        <td class="hidden lg:table-cell font-bold" x-text="order.total"></td>
+                        <td class="hidden lg:table-cell font-bold" x-html="getFormattedTotal(order.total, order.currency_code)"></td>
                         <td class="hidden lg:table-cell status-cell" :class="order.status.toLowerCase()"
                             x-text="order.status"></td>
                         <td>
@@ -219,10 +221,21 @@ $jsonOrders = json_encode($ordersData);
 
 <script>
     function initOrders() {
+        let orders = [];
+        try {
+            orders = JSON.parse('<?= $jsonOrders ?>');
+        } catch (error) {
+            console.error("Error parsing JSON:", error);
+        }
+
         return {
-            orders: JSON.parse('<?= $jsonOrders ?>'),
+            orders: orders,
             sortField: 'date',
             sortOrder: 'DESC',
+
+            getFormattedTotal(total, currencyCode) {
+                return new Intl.NumberFormat('en-US', { style: 'currency', currency: currencyCode }).format(total);
+            },
 
             sortOrders(field) {
                 if (this.sortField === field) {
