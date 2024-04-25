@@ -1,0 +1,266 @@
+<?php
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\HeroiconsOutline;
+use Magento\Framework\Data\Helper\PostHelper;
+use Magento\Framework\Escaper;
+use Magento\Sales\Block\Order\Recent;
+use Magento\Sales\Helper\Reorder;
+use Magento\Sales\Model\Order;
+
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundHelper
+
+/** @var Escaper $escaper */
+/** @var Recent $block */
+/** @var ViewModelRegistry $viewModels */
+
+/** @var HeroiconsOutline $heroicons */
+$heroicons = $viewModels->require(HeroiconsOutline::class);
+/** @var Order[] $orders */
+$orders = $block->getOrders();
+$count = count($orders);
+
+$extraActions = [];
+if ($extraActionTitleBlocks = $block->getLayout()->getChildBlocks('order-list-extra-action-titles')) {
+    foreach ($extraActionTitleBlocks as $alias => $extraActionTitleBlock) {
+        $extraActions[$alias] = $extraActionTitleBlock->toHtml();
+    }
+    $extraActions = array_filter($extraActions, function ($output, string $alias) use ($block): bool {
+        return $output && $block->getLayout()->getChildBlock('order-list-extra-action-buttons', $alias);
+    }, ARRAY_FILTER_USE_BOTH);
+}
+
+$ordersData = [];
+foreach ($orders as $order) {
+    $viewUrl = $escaper->escapeUrl($block->getViewUrl($order));
+    $canReorder = $this->helper(Reorder::class)->canReorder($order->getEntityId());
+    $reorderUrl = '';
+    $reorderData = [];
+    if ($canReorder) {
+        $formData = json_decode($this->helper(PostHelper::class)->getPostData($block->getReorderUrl($order)), true);
+        $reorderUrl = $escaper->escapeUrl($formData['action']);
+        $reorderData = $formData['data'];
+    }
+
+    $minimumDigits = 5;
+
+    $ordersData[] = [
+        'order_id' => sprintf('%0' . $minimumDigits . 'd', ltrim($order->getRealOrderId(), '0')),
+        'date' => $order->getCreatedAt(),
+        'quote_id' => $order->getQuoteId(),
+        'ship_to' => $order->getShippingAddress() ? $order->getShippingAddress()->getName() : 'N/A',
+        'total' =>  $order->getGrandTotal(),
+        'currency_code' => $order->getOrderCurrencyCode(),
+        'status' => $order->getStatusLabel(),
+        'view_url' => $viewUrl,
+        'can_reorder' => $canReorder,
+        'reorder_url' => $reorderUrl,
+        'reorder_data' => $reorderData,
+        'status_not_received' => $order->getStatus() !== 'received',
+    ];
+}
+$jsonOrders = json_encode($ordersData, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
+
+?>
+<div
+    class="border"
+    x-data="initOrders()"
+>
+    <div class="font-bold p-4">
+        <h2
+            id="recentOrders"
+            class="text-2xl block"
+        ><?= $escaper->escapeHtml(__('Recent Orders')) ?></h2>
+    </div>
+    <div class="overflow-x-auto">
+        <?= $block->getChildHtml() ?>
+        <?php if ($count > 0): ?>
+            <table id="my-orders-table" class="block-content w-full sm:table-fixed lg:table-auto"
+                   aria-labelledby="recentOrders">
+                <thead class="text-sm text-white bg-secondary">
+                <tr>
+                    <th class="text-start cursor-pointer" @click="sortOrders('order_id')">Order NR.
+                        <span class="ml-2 inline-block">
+                            <template x-if="sortField === 'order_id' && sortOrder === 'ASC'">
+                                <?= $heroicons->arrowUpHtml('', 12, 12, ['aria-hidden' => 'true']) ?>
+                            </template>
+                            <template x-if="sortField === 'order_id' && sortOrder === 'DESC'">
+                                <?= $heroicons->arrowDownHtml('', 12, 12, ['aria-hidden' => 'true']) ?>
+                            </template>
+                        </span>
+                    </th>
+                    <th class="text-start cursor-pointer" @click="sortOrders('date')">Date
+                        <span class="ml-2 inline-block">
+                            <template x-if="sortField === 'date' && sortOrder === 'ASC'">
+                                <?= $heroicons->arrowUpHtml('', 12, 12, ['aria-hidden' => 'true']) ?>
+                            </template>
+                            <template x-if="sortField === 'date' && sortOrder === 'DESC'">
+                                <?= $heroicons->arrowDownHtml('', 12, 12, ['aria-hidden' => 'true']) ?>
+                            </template>
+                        </span>
+                    </th>
+                    <th class="text-start cursor-pointer" @click="sortOrders('quote_id')">Quote NR.
+                        <span class="ml-2 inline-block">
+                            <template x-if="sortField === 'quote_id' && sortOrder === 'ASC'">
+                                <?= $heroicons->arrowUpHtml('', 12, 12, ['aria-hidden' => 'true']) ?>
+                            </template>
+                            <template x-if="sortField === 'quote_id' && sortOrder === 'DESC'">
+                                <?= $heroicons->arrowDownHtml('', 12, 12, ['aria-hidden' => 'true']) ?>
+                            </template>
+                        </span>
+                    </th>
+                    <th class="text-start cursor-pointer" @click="sortOrders('ship_to')">Ship To
+                        <span class="ml-2 inline-block">
+                            <template x-if="sortField === 'ship_to' && sortOrder === 'ASC'">
+                                <?= $heroicons->arrowUpHtml('', 12, 12, ['aria-hidden' => 'true']) ?>
+                            </template>
+                            <template x-if="sortField === 'ship_to' && sortOrder === 'DESC'">
+                                <?= $heroicons->arrowDownHtml('', 12, 12, ['aria-hidden' => 'true']) ?>
+                            </template>
+                        </span>
+                    </th>
+                    <th class="text-start hidden lg:table-cell cursor-pointer" @click="sortOrders('total')">Order Total
+                        <span class="ml-2 inline-block">
+                            <template x-if="sortField === 'total' && sortOrder === 'ASC'">
+                                <?= $heroicons->arrowUpHtml('', 12, 12, ['aria-hidden' => 'true']) ?>
+                            </template>
+                            <template x-if="sortField === 'total' && sortOrder === 'DESC'">
+                                <?= $heroicons->arrowDownHtml('', 12, 12, ['aria-hidden' => 'true']) ?>
+                            </template>
+                        </span>
+                    </th>
+                    <th class="text-start hidden lg:table-cell cursor-pointer" @click="sortOrders('status')">Status
+                        <span class="ml-2 inline-block">
+                            <template x-if="sortField === 'status' && sortOrder === 'ASC'">
+                                <?= $heroicons->arrowUpHtml('', 12, 12, ['aria-hidden' => 'true']) ?>
+                            </template>
+                            <template x-if="sortField === 'status' && sortOrder === 'DESC'">
+                                <?= $heroicons->arrowDownHtml('', 12, 12, ['aria-hidden' => 'true']) ?>
+                            </template>
+                        </span>
+                    </th>
+                    <th><?= $escaper->escapeHtml(__('View')) ?>
+                        <?php if ($this->helper(Reorder::class)->isAllow()): ?>
+                            / <?= $escaper->escapeHtml(__('Reorder')) ?>
+                        <?php endif; ?>
+                        <?php foreach ($extraActions as $extraActionTitle): ?>
+                            <?= /** @noEscape */
+                            $extraActionTitle ?>
+                        <?php endforeach; ?>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <template x-for="order in orders" :key="order.order_id">
+                    <tr class="align-center border-b border-container w-full">
+                        <th id="order{{ order.order_id }}" class="text-start font-normal tb-text-secondary"
+                            x-text="order.order_id"></th>
+                        <td class="hidden lg:table-cell" x-text="order.date" @click="sortOrders('date')"></td>
+                        <td class="tb-text-secondary" x-text="order.quote_id"></td>
+                        <td x-text="order.ship_to"></td>
+                        <td class="hidden lg:table-cell font-bold" x-html="getFormattedTotal(order.total, order.currency_code)"></td>
+                        <td class="hidden lg:table-cell status-cell" :class="order.status.toLowerCase()"
+                            x-text="order.status"></td>
+                        <td>
+                            <template x-if="order.status_not_received">
+                                <div class="p-2 flex justify-end gap-3">
+                                    <a :href="order.view_url"
+                                       class="inline-block text-sm underline text-secondary-darker"
+                                       :title="'View Order ' + order.order_id"
+                                       :aria-label="'View order ' + order.order_id.trim()">
+                                        <?= $heroicons->eyeHtml('', 24, 24, ['aria-hidden' => 'true']) ?>
+                                    </a>
+                                    <template x-if="order.can_reorder">
+                                        <form :action="order.reorder_url" method="post"
+                                              class="inline-flex items-center">
+                                            <?= $block->getBlockHtml('formkey'); ?>
+                                            <input type="hidden" name="data"
+                                                   :value="JSON.stringify(order.reorder_data)">
+                                            <button type="submit" class="inline-block text-sm text-secondary-darker"
+                                                    :title="'Reorder ' + order.order_id"
+                                                    :aria-label="'Reorder ' + order.order_id.trim()">
+                                                <?= $heroicons->refreshHtml('', 24, 24, ['aria-hidden' => 'true']) ?>
+                                            </button>
+                                        </form>
+                                    </template>
+                                    <template x-if="!order.can_reorder">
+                                        <?= $heroicons->refreshHtml('text-gray-300', 24, 24,
+                                            ['aria-hidden' => 'true']) ?>
+                                    </template>
+                                </div>
+                            </template>
+                        </td>
+                    </tr>
+                </template>
+                </tbody>
+            </table>
+            <div class="p-5">
+                <?php if ($count > 0): ?>
+                    <a
+                        class="table-bt"
+                        href="<?= $escaper->escapeUrl($block->getUrl('sales/order/history')) ?>"
+                        aria-label="<?= $escaper->escapeHtmlAttr(__('View all orders')) ?>"
+                    ><?= $escaper->escapeHtml(__('View All')) ?></a>
+                <?php endif; ?>
+            </div>
+        <?php else: ?>
+            <div class="message info empty">
+                <span><?= $escaper->escapeHtml(__('You have placed no orders.')) ?></span>
+            </div>
+        <?php endif; ?>
+
+    </div>
+</div>
+
+<script>
+    function initOrders() {
+        let orders = [];
+        try {
+            orders = JSON.parse('<?= $jsonOrders ?>');
+        } catch (error) {
+            console.error("Error parsing JSON:", error);
+        }
+
+        return {
+            orders: orders,
+            sortField: 'date',
+            sortOrder: 'DESC',
+
+            getFormattedTotal(total, currencyCode) {
+                return new Intl.NumberFormat('en-US', { style: 'currency', currency: currencyCode }).format(total);
+            },
+
+            sortOrders(field) {
+                if (this.sortField === field) {
+                    this.sortOrder = this.sortOrder === 'DESC' ? 'ASC' : 'DESC';
+                } else {
+                    this.sortField = field;
+                    this.sortOrder = 'ASC';
+                }
+
+                this.orders = [...this.orders].sort((a, b) => {
+                    let valueA = a[field];
+                    let valueB = b[field];
+
+                    if (field === 'date') {
+                        valueA = new Date(valueA);
+                        valueB = new Date(valueB);
+                    }
+
+                    if (this.sortOrder === 'ASC') {
+                        return valueA > valueB ? 1 : (valueA < valueB ? -1 : 0);
+                    } else {
+                        return valueA < valueB ? 1 : (valueA > valueB ? -1 : 0);
+                    }
+                });
+            }
+        };
+    }
+</script>

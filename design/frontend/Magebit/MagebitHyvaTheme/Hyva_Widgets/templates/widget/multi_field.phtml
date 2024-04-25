@@ -1,0 +1,77 @@
+<?php
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ * See https://hyva.io/license
+ */
+
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\Slider;
+use Hyva\Widgets\Block\Widgets\MultiField;
+use Magento\Framework\Escaper;
+
+// phpcs:disable Generic.Files.LineLength.TooLong
+
+/** @var Escaper $escaper */
+/** @var MultiField $block */
+/** @var ViewModelRegistry $viewModels */
+/** @var Slider $sliderViewModel */
+
+$containerBackground = $block->getData('hyva_multi_field_container_background') ?: '';
+$contentMargin = $block->getData('hyva_multi_field_margin') ?: '';
+$contentPadding = $block->getData('hyva_multi_field_padding') ?: '';
+$contentContainerClasses = $block->getData('hyva_multi_field_container') ? 'container mx-auto' : '';
+
+$displayType = $block->getData('hyva_multi_field_type');
+$widgetTitle = $block->getData('hyva_multi_field_title');
+$widgetText = $block->getData('hyva_multi_field_data');
+
+$multiFieldSteps = $block->getMultiFieldSteps() ?: [];
+
+if ($fadeAnimations = $block->getData('hyva_multi_field_fade_animations')) {
+    $animationClasses = 'transform ease-in-out transition';
+    $animationClassesStart = 'duration-300 ';
+    $animationClassesEnd = 'duration-500 ';
+
+    if ($fadeAnimations) {
+        if (strpos($fadeAnimations, 'fade') !== false) {
+            $animationClassesStart .= 'opacity-0';
+            $animationClassesEnd .= 'opacity-100';
+        }
+
+        if (strpos($fadeAnimations, 'up') !== false) {
+            $animationClassesStart .= ' translate-y-20';
+            $animationClassesEnd .= ' translate-y-0';
+        }
+
+        if (strpos($fadeAnimations, 'right') !== false) {
+            $animationClassesStart .= ' -translate-x-20';
+            $animationClassesEnd .= ' translate-x-0';
+        }
+
+        if (strpos($fadeAnimations, 'down') !== false) {
+            $animationClassesStart .= ' -translate-y-20';
+            $animationClassesEnd .= ' translate-y-0';
+        }
+
+        if (strpos($fadeAnimations, 'left') !== false) {
+            $animationClassesStart .= ' translate-x-20';
+            $animationClassesEnd .= ' translate-x-0';
+        }
+    }
+}
+?>
+<div class="overflow-hidden m-4 p-4">
+    <section class="">
+        <div class="bg-sliderBg">
+            <?php
+            $sliderViewModel = $viewModels->require(Slider::class);
+            $itemsTemplate = 'Hyva_Widgets::widget/slider/multifield-item.phtml';
+            ?>
+            <?= $sliderViewModel->getSliderForItems($itemsTemplate, $multiFieldSteps)->setData('max_visible', 1)
+                ->setData('maybe_purged_tailwind_slide_item_classes', 'py-1 w-full')->toHtml() ?>
+        </div>
+    </section>
+</div>
