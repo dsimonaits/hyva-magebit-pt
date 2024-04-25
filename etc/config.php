@@ -380,6 +380,7 @@ return [
         'Hyva_OrderCancellationWebapi' => 1,
         'Hyva_Theme' => 1,
         'Hyva_LumaCheckout' => 1,
+        'Hyva_Widgets' => 1,
         'MSP_Common' => 1,
         'MSP_DevTools' => 1,
         'PayPal_Braintree' => 1,

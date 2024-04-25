@@ -77,6 +77,16 @@ module.exports = hyvaModules.mergeTailwindConfig({
                     "DEFAULT": '#160F3E',
                     darker: colors.blue['300']
                 },
+                sliderBg: {
+                    lighter: '#003057',
+                    "DEFAULT": '#003057',
+                    darker: '#003057'
+                },
+                buttonBg: {
+                    lighter: '#5db7ff',
+                    "DEFAULT": '#5db7ff',
+                    darker: '#2f5e82'
+                },
                 container: {
                     lighter: '#F2F2F2',
                     "DEFAULT": '#fafafa',
@@ -148,6 +158,7 @@ module.exports = hyvaModules.mergeTailwindConfig({
         root + 'app/code/**/src/**/*.jsx',
         root + 'vendor/hyva-themes/magento2-hyva-checkout/src/reactapp/src/**/*.jsx',
         root + 'app/code/**/Block/Widget/**/*.php',
+        root + 'vendor/hyva-themes/magento2-hyva-widgets/**/*.phtml',
         // root + 'var/custom_html/**/*'
 
     ]
