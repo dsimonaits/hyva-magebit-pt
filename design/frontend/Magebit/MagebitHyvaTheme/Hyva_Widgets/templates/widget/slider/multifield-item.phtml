@@ -1,8 +1,8 @@
 <?php
 /**
- * Hyvä Themes - https://hyva.io
- * Copyright © Hyvä Themes 2020-present. All rights reserved.
- * See https://hyva.io/license
+ * @copyright Copyright (c) 2024 Magebit, Ltd. (https://magebit.com/)
+ * @author    Magebit <info@magebit.com>
+ * @license   MIT
  */
 
 declare(strict_types=1);
@@ -23,7 +23,6 @@ use Hyva\Theme\ViewModel\HeroiconsOutline;
 $column = $block->getData('item');
 
 $heroicons = $viewModels->require(HeroiconsOutline::class);
-
 
 $buttonLabel = $column->getButton();
 $buttonUrl = $column->getButtonUrl();
@@ -55,7 +54,6 @@ $buttonUrl = $column->getButtonUrl();
                 <?= $heroicons->arrowRightHtml("w-2 h-2", 25, 25) ?>
             </button>
         </div>
-
     </div>
     <div class="flex-1 w-full">
         <a href="<?= $escaper->escapeUrl($column->getButtonUrl()) ?>"
