@@ -41,7 +41,7 @@ $buttonUrl = $column->getButtonUrl();
             <button
                 aria-label="<?= $escaper->escapeHtml(__('Previous')) ?>"
                 tabindex="-1"
-                class="text-white bg-buttonBg-darker w-20  p-1 focus:outline-none flex justify-center hover:bg-buttonBg-lighter ease-in-out transition"
+                class="text-white bg-buttonBg-darker w-20  p-1 focus:outline-none flex justify-center hover:bg-buttonBg-hover ease-in-out transition"
                 :class="{'opacity-25 pointer-events-none' : active === 0 }"
                 @click="scrollPrevious">
                 <?= $heroicons->arrowLeftHtml("w-2 h-2", 25, 25) ?>
@@ -49,7 +49,7 @@ $buttonUrl = $column->getButtonUrl();
             <button
                 aria-label="<?= $escaper->escapeHtml(__('Next')) ?>"
                 tabindex="-1"
-                class="text-white bg-buttonBg-darker w-20  p-1 focus:outline-none flex justify-center hover:bg-buttonBg-lighter ease-in-out transition"
+                class="text-white bg-buttonBg-darker w-20  p-1 focus:outline-none flex justify-center hover:bg-buttonBg-hover ease-in-out transition"
                 :class="{'opacity-25 pointer-events-none' : active >= itemCount-pageSize }"
                 @click="scrollNext">
                 <?= $heroicons->arrowRightHtml("w-2 h-2", 25, 25) ?>

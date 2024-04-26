@@ -4973,8 +4973,8 @@ td {
 
 .bg-buttonBg-darker {
   --tw-bg-opacity: 1;
-  background-color: rgba(47, 94, 130, 1);
-  background-color: rgba(47, 94, 130, var(--tw-bg-opacity));
+  background-color: rgba(93, 183, 255, 1);
+  background-color: rgba(93, 183, 255, var(--tw-bg-opacity));
 }
 
 .bg-container {
@@ -6263,6 +6263,12 @@ body {
 
 .hover\:bg-primary\/10:hover {
   background-color: rgba(29, 78, 216, 0.1);
+}
+
+.hover\:bg-buttonBg-hover:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(47, 94, 130, 1);
+  background-color: rgba(47, 94, 130, var(--tw-bg-opacity));
 }
 
 .hover\:text-black:hover {
