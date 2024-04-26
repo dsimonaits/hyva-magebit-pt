@@ -85,7 +85,8 @@ module.exports = hyvaModules.mergeTailwindConfig({
                 buttonBg: {
                     lighter: '#5db7ff',
                     "DEFAULT": '#5db7ff',
-                    darker: '#2f5e82'
+                    darker: '#5db7ff',
+                    hover: '#2f5e82'
                 },
                 container: {
                     lighter: '#F2F2F2',
